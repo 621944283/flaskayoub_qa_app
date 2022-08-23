@@ -1,0 +1,159 @@
+{% extends 'dashboard.html' %}
+
+{% block head_css %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/profile.css')}}">
+{% endblock head_css %}
+
+
+{% block profile %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="{{url_for('static', filename='css/profile.css')}}">
+<div class="container" id="soft">
+<div class="row">
+		<div class="col-12">
+			<!-- Page title -->
+			<div class="my-3">
+				<h3>My Profile</h3>
+				<hr>
+			</div>
+			<!-- Form START -->
+			<div class="{{'tab-pane show active fade p-3' if active_tab=='profile' else 'tab-pane fade p-3'}}" id="nav-newLesson"
+    role="tabpanel" aria-labelledby="nav-newLesson-tab">
+			 <form class="file-upload my-3" id="bcol" method="POST" enctype="multipart/form-data">
+			{{ profile_form.hidden_tag() }}
+				<div class="row mb-5 gx-5">
+					<!-- Contact detail -->
+					<div class="col-xxl-8 mb-5 mb-xxl-0">
+						<div class="bg-secondary-soft px-4 py-5 rounded">
+							<div class="row g-3">
+								<h4 class="mb-4 mt-0">Contact detail</h4>
+								<div>
+								<img src="{{image_file}}" class="rounded-circle user-img row mb-3" id ="mm"alt="" style="width: 150px; height: 150px;">
+								</div>
+								<!-- First Name -->
+								<div class="col-md-6">
+									<label class="form-label">First Name *</label>
+									<input type="text" class="form-control" placeholder="" aria-label="First name" value="{{current_user.fname}}">
+								</div>
+								<!-- Last name -->
+								<div class="col-md-6">
+									<label class="form-label">Last Name *</label>
+									<input type="text" class="form-control" placeholder="" aria-label="Last name" value="{{current_user.lname}}">
+								</div>
+								<!-- Phone number -->
+								<div class="col-md-6"> {{profile_form.username.label(class="form-control-label")}}
+                  {% if profile_form.username.errors %}
+                  {{profile_form.username(class="form-control form-control-lg is-invalid")}} 
+                  <div class="invalid-feedback">
+                      {% for error in profile_form.username.errors %} 
+                      <span>
+                          {{error}} 
+                      </span>
+                      {% endfor %} 
+                  </div>
+                  {% else %} 
+                  {{profile_form.username(class="form-control form-control-lg")}}
+                  {% endif %} 
+                  
+								</div>
+								<!-- Email -->
+								<div class="col-md-6">
+								    {{profile_form.email.label(class="form-control-label")}}
+                  {% if profile_form.email.errors %}
+                  {{profile_form.email(class="form-control form-control-lg is-invalid")}} 
+                  <div class="invalid-feedback">
+                      {% for error in profile_form.email.errors %} 
+                      <span>
+                          {{error}} 
+                      </span>
+                      {% endfor %} 
+                  </div>
+                  {% else %} 
+                  {{profile_form.email(class="form-control form-control-lg")}}
+                  {% endif %} 
+								</div>
+								<!-- Skype -->
+								<div class="col-md-3" id="bio">
+								    {{profile_form.bio.label(class="form-control-label")}} 
+                                                      {{profile_form.bio(class="form-control-label")}}
+								</div>
+							</div> <!-- Row END -->
+						</div>
+					</div>
+					<!-- Upload profile -->
+					<div class="col-xxl-4">
+						<div class="bg-secondary-soft px-4 py-5 rounded">
+							<div class="row g-3">
+								<h4 class="mb-4 mt-0">Upload your profile photo</h4>
+								<div class="text-center p-5 my-5">
+									<!-- Image upload -->
+									<div class="square position-relative display-2 mb-3">
+										<i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary">
+										</i>
+									</div>
+									<!-- Button -->
+									<input type="file" id="customFile" name="file" hidden="">
+									<label class="btn btn-danger-soft btn-block my-3 mb-1 col-md-6" for="customFile">{{profile_form.picture.label}} 
+
+									</label>
+									<div>
+									    
+									</div>
+									{{profile_form.picture(class="container btn btn-success-soft btn mb-1 col-md-12 my-1")}} 
+
+{% if profile_form.picture.errors %}
+{% for error in profile_form.picture.errors %}
+<span class="text-danger">
+									    {{error}}
+</span>
+{%endfor%}
+{%endif%} 
+									
+									<!-- Content -->
+									<p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>Minimum size 300px x 300px</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- Row END -->
+
+
+					<!-- change password -->
+					<div class="col-xxl-6">
+						<div class="bg-secondary-soft px-4 py-5 rounded">
+							<div class="row g-3">
+								<h4 class="my-4">Change Password</h4>
+								<!-- Old password -->
+								<div class="col-md-6">
+									<label for="exampleInputPassword1" class="form-label">Old password *</label>
+									<input type="password" class="form-control" id="exampleInputPassword1">
+								</div>
+								<!-- New password -->
+								<div class="col-md-6">
+									<label for="exampleInputPassword2" class="form-label">New password *</label>
+									<input type="password" class="form-control" id="exampleInputPassword2">
+								</div>
+								<!-- Confirm password -->
+								<div class="col-md-12">
+									<label for="exampleInputPassword3" class="form-label">Confirm Password *</label>
+									<input type="password" class="form-control" id="exampleInputPassword3">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="gap-3 d-md-flex justify-content-md-end text-center">
+					<button type="submit" class="container btn btn-primary btn-lg mb-1 col-md-6">
+					    <!-- Upadte --> 
+					    {{profile_form.submit(class="btn btn-primary")}} 
+					    </button>
+				</div>
+				</div> <!-- Row END -->
+				<!-- button -->
+				
+			</form> <!-- Form END -->
+		</div>
+	</div>
+	</div>
+</form> 
+{% endblock profile %} 

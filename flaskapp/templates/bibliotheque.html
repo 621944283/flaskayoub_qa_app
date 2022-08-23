@@ -1,0 +1,143 @@
+{% extends 'layout.html'%}
+{% block content %}
+
+   
+<div></div>
+<div class="my-2 p-3 text-center wow fadeInUp" data-wow-delay="0.1s">
+    <h6 class="section-title bg-white text-center text-primary px-3 py-3 my-2">Books</h6>
+    <h1 class="mb-5">Best Books in this fields </h1>
+    <hr>
+    <h6 class="bg-info"> In my experience i will to presente you some the best books in the fields than Trading,Data Science , economy and finance </h6>
+
+</div>
+
+    
+<section class="my-3 container mx-auto">
+  <div class="my-3">
+
+  </div>
+  <div class="row">
+    {% for bk in book%}
+    <div class="col-md-6 card mb-3 my-5" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{url_for('static',filename='icon_book/'+bk.icon_book)}}" class="card-img img-fluid" alt="..." style="height: 100%; max-width: auto;">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title">{{bk.title}}</h6>
+              <p class="card-text small">{{bk.description}}</p>
+              <p class="card-text"><small class="text-muted">{{bk.date_posted.strftime('%Y-%m-%d')}}</small></p>
+              <small class="text-muted card-text"><a href="{{bk.link_book}}">{{bk.link_book}}</a></small>
+            </div>
+          </div>
+        </div>
+    </div> 
+    
+    {% endfor %}
+    <div class="my-3">
+
+    </div>
+  </div>
+</section>
+<section>
+    <div class="col-md-6 card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="static/img/crypto.jpg" class="card-img img-fluid" alt="..." style="height: 100%; max-width: auto;">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title">Card title</h6>
+              <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div> 
+
+
+
+    <div class="col-md-6 card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="static/img/crypto1.jpg" class="card-img img-fluid" alt="..." style="height: 100%; max-width: auto;">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title">Card title</h6>
+              <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div> 
+      
+    <div class="p-5">
+
+    </div>
+    <div class="col-md-6 card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="static/img/crypto.jpg" class="card-img img-fluid" alt="..." style="height: 100%; max-width: auto;">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title">Card title</h6>
+              <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div> 
+
+
+    <div class="col-md-6 card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="static/img/crypto1.jpg" class="card-img img-fluid" alt="..." style="height: 100%; max-width: auto;">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title">Card title</h6>
+              <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div> 
+      
+
+    <div class="col-md-6 card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="static/img/crypto.jpg" class="card-img img-fluid" alt="..." style="height: 100%; max-width: auto;">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title">Card title</h6>
+              <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div> 
+
+
+    <div class="col-md-6 card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="static/img/canva.png" class="card-img img-fluid" alt="..." style="height: 100%; max-width: auto;">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title">Card title</h6>
+              <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div> 
+  </div>
+</section>
+{% endblock content %}

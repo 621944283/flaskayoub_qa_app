@@ -1,0 +1,14 @@
+{% extends 'admin/master.html' %}
+{% block head_css %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/profile.css')}}">
+{% endblock head_css %}
+
+{% block body %}
+
+<p class="container text-center text-primary"> welcom to page admin you can see data of the users and Field and lessons, you can Update or Delete any user or any lesson or field ,and you can geve any user permission to access in dashboard and write Article,Lessons,Field and put Book , just click in User ,choose any user and go to edit, after this go to Column Admin and tick in admin ,after this will become Admin = True</p>
+
+
+{% endblock body %}
+
+

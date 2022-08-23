@@ -1,0 +1,84 @@
+{% extends "layout.html"%}
+{% block content %}
+
+
+{% for ed in education %}  
+                <img class="border rounded-circle p-1 mx-auto mb-3 my-1" src="{{url_for('static',filename='education_thumbnail/'+ed.thumbnail)}}" style="width: 250px; height: 250px;">                
+
+<div class="container py-3 my-3">
+
+    <div class="row">
+      <h3>{{ed.title}}</h3>
+      <hr class="text-info">
+        <!-- article contents -->
+        <div class="col-lg-11 col-md-12">
+       
+        {{ed.content | safe}}
+     
+
+        
+    </div>
+    <hr class="text-primary">
+        <div></div>
+            
+        <!-- sidebar -->
+        
+        
+         <!--  previous and next lesson -->
+            
+</div>
+        
+                      <span class="text-muted">
+                       Posted on: {{ed.date_posted.strftime('%Y-%m-%d')}} </span>
+                      </span>
+                   
+                      
+          
+            <!-- course icon -->
+            <div class="d-flex flex-row">
+            <div class="">
+              <br>
+              <h3 class="text-info">BEST SOURCE : </h3>
+              <hr>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th>Source</th>
+                    
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  <tr>
+                    <th scope="row"></th>
+                    <td colspan="">{{ed.sources}}</td>
+                    
+                  </tr>
+                  <tr>
+                    
+                  </tr>
+                  <tr>
+                    <th scope="row"></th>
+                    
+                    
+                  </tr>
+                </tbody>
+               
+              </table>
+            </div>
+            </div>
+           
+            <br>
+            <!-- list of lessons in this course -->
+            
+        </div>
+    </div>
+    <br>
+   
+
+
+</div>
+{% endfor %}
+
+{% endblock content%}

@@ -1,0 +1,89 @@
+{% extends "dashboard.html"%}
+{% block new_book %}
+
+<div class="{{'tab-pane show active fade p-3' if active_tab=='new_book' else 'tab-pane fade p-3'}}" id="nav-newBook"
+    role="tabpanel" aria-labelledby="nav-newBook-tab">
+    <form action="/dashboard/new_book" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+ 
+        <legend class="border-bottom my-3">New Book</legend>
+        
+        <div class="mb-3">
+            {{ form.title.label(class='form-control-label')}}
+            {% if form.title.errors %}
+            {{ form.title(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.title(class='form-control')}}
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.slug.label(class='form-control-label')}}
+            {% if form.slug.errors %}
+            {{ form.slug(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.slug.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.slug(class='form-control')}}
+            {% endif %}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.description.label(class='form-control-label')}}
+            {% if form.description.errors %}
+            {{ form.description(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.description.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.description(class='form-control')}}
+            {% endif %}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.icon_book.label(class='form-control-label')}}
+            {% if form.icon_book.errors %}
+            {{ form.icon_book(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.icon_book.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.icon_book(class='form-control')}}
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.link_book.label(class='form-control-label')}}
+            {% if form.link_book.errors %}
+            {{ form.link_book(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.link_book.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.link_book(class='form-control')}}
+            {% endif %}
+        </div>
+
+
+        <div class="form-group my-4">
+            {{form.submit(class="btn bg btn-outline-success")}} 
+          
+        </div>
+    </form>
+    
+</div>
+
+
+{% endblock new_book %}

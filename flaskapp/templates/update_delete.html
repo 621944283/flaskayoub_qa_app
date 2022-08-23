@@ -1,0 +1,60 @@
+{% extends "dashboard.html"%}
+{% block updates %}
+<div class="{{'tab-pane show active fade p-3' if active_tab=='update_delete' else 'tab-pane fade p-3'}}" id="nav-update_delete" role="tabpanel" aria-labelledby="nav-update_delete-tab">        
+
+<section id="what-we-do" class="what-we-do container">
+  <div class="container">
+      <div class="section-title py-5 container">
+      <h2>Read and learn</h2>
+      <p>This article and lesson can change your life  :</p>
+    </div>
+</section>
+<div>
+  {% for lesson in current_user.lessons %}
+  <div class="container py-3" style="width: 80%">
+    
+    <div class="card">
+      <div class="row ">
+        <div class="col-sm-3">
+          <img class="img-fluid" src="{{url_for('static',filename='lesson_thumbnail/'+lesson.thumbnail)}}" alt="Responsive image" style="height: 98%; max-width: auto;">
+          </div>
+          <div class="col-sm-9 px-3">
+            <div class="card-block px-3">
+              <h4 class="card-title">{{lesson.title}}</h4>
+              
+              <p class="card-text small">{{lesson.description}}</p>
+              <hr>
+              
+              <div class="d-flex flex-row-reverse small">
+                  <a href="{{url_for('users.lesson',lesson_slug=lesson.slug,field=lesson.field_name.title)}}" class="btn btn-primary sm my-3 btn-sm">Read More</a>
+                  <div class="m-auto">
+                    <a href="{{url_for('users.update_lesson',lesson_slug=lesson.slug,field=lesson.field_name.title)}}" class="btn btn-info btn-sm m-1">update</a>
+    >
+                 </div>
+                  <span class="container small">By:  
+                      <img class="border rounded-circle mx-auto" src="{{url_for('static',filename='user_pics/'+lesson.author.image_file)}}" style="width: 70px; height: 70px;">
+                      <a href='#' class="text-justify text-success">{{lesson.author.username}}</a>
+                      <small class="py-2">
+                          <a href="" class="text-muted p-3 text-primary">{{lesson.date_posted.strftime('%Y-%m-%d')}}</a>
+                      </small>
+                  </span>  
+                  
+              </div> 
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  
+</div>
+{% endfor %}
+</div>
+      <div></div>
+      
+
+{% endblock updates %}

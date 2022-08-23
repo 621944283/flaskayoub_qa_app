@@ -1,0 +1,100 @@
+{% extends 'layout.html'%}
+{% block content %}
+<section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+   
+    <div class="container text-center text-md-left" data-aos="fade-up">
+      <h1>Welcome to <span>Robot</span></h1>
+      <h2 class=" container text-center">Start learning and gain skills to ensure a successful future</h2>
+      <a href="" class="btn-get-started scrollto">Get Started</a>
+    </div>
+</section><!-- End Hero -->
+<section id="what-we-do" class="what-we-do container">
+    <div class="container">
+        <div class="section-title py-5 container">
+        <h2>Read and learn</h2>
+        <p>This article and lesson can change your life  :</p>
+      </div>
+</section>
+
+<section>
+    <div class="container content bg-white p-3 my-2">
+        <h2>The Best Latest Lessons</h2>
+        <hr />
+        <div></div>
+    </div>
+ 
+ <section>
+    {% for lesson in lessons.items %}
+    <div class="container py-3" style="width: 80%">
+   
+      <div class="card">
+        <div class="row ">
+          <div class="col-sm-3">
+            <img class="img-fluid" src="{{url_for('static',filename='lesson_thumbnail/'+lesson.thumbnail)}}" alt="Responsive image" style="height: 98%; max-width: auto;">
+            </div>
+            <div class="col-sm-9 px-3">
+              <div class="card-block px-3">
+                <h4 class="card-title">{{lesson.title}}</h4>
+                
+                <p class="card-text small">{{lesson.description}}</p>
+                <hr>
+                
+                <div class="d-flex flex-row-reverse small">
+                    <a href="{{url_for('users.lesson',lesson_slug=lesson.slug,field=lesson.field_name.title)}}" class="btn btn-primary sm my-3 btn-sm">Read More</a>
+                    <span class="container small">By:  
+                        <img class="border rounded-circle mx-auto" src="{{url_for('static',filename='user_pics/'+lesson.author.image_file)}}" style="width: 70px; height: 70px;">
+                        <a href='#' class="text-justify text-success">{{lesson.author.username}}</a>
+                        <small class="py-2">
+                            <a href="" class="text-muted p-3 text-primary">{{lesson.date_posted.strftime('%Y-%m-%d')}}</a>
+                        </small>
+                    </span>  
+                    
+                </div> 
+                
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    {% endfor %}
+    <nav class="container mt-5" aria-label="...">
+      <ul class="pagination" style="display: flex; justify-content: flex-end">
+      {% for page_num in lessons.iter_pages(left_edge=1, right_edge=1, left_current=1,right_current=2) %}
+      {% if page_num %}
+      {% if lessons.page == page_num %}
+      <li class="page-item active">
+          <a href="{{url_for('main.home',page=page_num)}}" class="page-link">
+              {{page_num}}
+  
+          </a>
+      
+      </li>
+      {% else %}
+      <li class="page-item">
+          <a href="{{url_for('main.home',page=page_num)}}" class="page-link">
+              {{page_num}}
+  
+          </a>
+      
+      </li>
+      {% endif %}
+      {% else %}
+      <span class="mx-2">...</span>   
+      {% endif %}
+      {% endfor %}
+      </ul>
+  </nav>
+    
+  </section>
+
+  
+        <div></div>
+        
+    </div>
+    
+</section>
+
+{% endblock content %}

@@ -1,0 +1,79 @@
+{%extends "layout.html"%}
+{% block content%}
+<!-- Tabs -->
+
+<div class="container my-5" id="soft">
+    {% if current_user.admin== True %}
+    <nav>
+       
+        <div class="nav nav-tabs" id="tablist">
+            <a class="link" href="{{url_for('users.profile')}}">
+                <button class="{{'nav-link active' if active_tab=='profile' else 'nav-link'}}" id="nav-profile-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
+                    aria-controls="nav-profile" aria-selected="true">Profile</button>
+            </a>
+          
+            <a class="link" href="{{url_for('users.new_lesson')}}">
+                <button class="{{'nav-link active' if active_tab=='new_lesson' else 'nav-link'}}" id="nav-newLesson-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-newLesson" type="button" role="tab"
+                    aria-controls="nav-newLesson" aria-selected="true">New Lesson</button>
+            </a>
+            
+            
+            <a class="link" href="{{url_for('users.new_book')}}">
+                <button class="{{'nav-link active' if active_tab=='new_book' else 'nav-link'}}" id="nav-newBook-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-newBook" type="button" role="tab"
+                    aria-controls="nav-newBook" aria-selected="true">New Book</button>
+            </a>
+
+            <a class="link" href="{{url_for('users.update_delete')}}">
+                <button class="{{'nav-link active' if active_tab=='update_delete' else 'nav-link'}}" id="nav-update_delete-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-update_delete type="button" role="tab"
+                    aria-controls="nav-update_delete" aria-selected="true">update_delete</button>
+            </a>
+
+            
+            {% if current_user.id == 1%}
+             <a class="link" href="{{url_for('users.add_education')}}">
+                <button class="{{'nav-link active' if active_tab=='add_education' else 'nav-link'}}" id="nav-add_education-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-add_education" type="button" role="tab"
+                    aria-controls="nav-add_education" aria-selected="true">show Education</button>
+             </a>
+            {%  endif %}
+
+            {% if current_user.id == 1 %}
+            <div class=" p-1 my-1">
+                <a href="{{url_for('admin.index')}}" class="link btn-primary btn btn-sm text-light">Database</a>
+            </div>
+                    
+                    
+            {% endif %}
+            
+           
+        </div>
+    </nav>
+    <!-- Tab contents here -->
+    <div class="tab-content" id="nav-tabContent">
+        <!-- profile -->
+        {% block profile %} {% endblock profile%}
+        <!-- New Lesson -->
+        {% block new_lesson %} {% endblock new_lesson %}
+        {% block new_book  %}
+        
+        {% endblock new_book %} 
+        {% block updates %} {% endblock updates %} 
+  
+        {% block add_education %} {% endblock add_education %} 
+
+        {% block update_education %} {% endblock update_education %}
+  
+        
+
+         
+
+    </div>
+    {% else %}
+     <h4 class="bg-danger">you dont have permission to access in  this page </h4>
+    {% endif %}
+</div>
+{% endblock content %}

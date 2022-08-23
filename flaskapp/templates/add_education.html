@@ -1,0 +1,96 @@
+{% extends "dashboard.html"%}
+{% block add_education %}
+
+<div class="{{'tab-pane show active fade p-3' if active_tab=='add_education' else 'tab-pane fade p-3'}}" id="nav-add_education"
+    role="tabpanel" aria-labelledby="nav-add_education-tab">
+    <form action="{{ url_for('users.add_education') }}" method="POST" enctype="multipart/form-data">
+        {{ education_form.hidden_tag()}}
+ 
+        <legend class="border-bottom my-3">Education</legend>
+        <div class="mb-3">
+            {{ education_form.title.label(class='form-control-label')}}
+            {% if education_form.title.errors %}
+            {{ education_form.title(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in education_form.title.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ education_form.title(class='form-control')}}
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ education_form.slug.label(class='form-control-label')}}
+            {% if education_form.slug.errors %}
+            {{ education_form.slug(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in education_form.slug.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ education_form.slug(class='form-control')}}
+            {% endif %}
+        </div>
+        
+        
+        
+        <div class="mb-3">
+            {{ education_form.content.label(class='form-control-label')}}
+            {% if education_form.content.errors %}
+            {{ education_form.content(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in education_form.content.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ education_form.content(class='form-control')}}
+            {% endif %}
+        </div>
+        
+
+        
+        <div class="mb-3">
+            {{ education_form.thumbnail.label(class='form-control-label')}}
+            {% if education_form.thumbnail.errors %}
+            {{ education_form.thumbnail(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in education_form.thumbnail.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ education_form.thumbnail(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ education_form.sources.label(class='form-control-label')}}
+            {% if education_form.sources.errors %}
+            {{ education_form.sources(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in education_form.sources.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ education_form.sources(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <div class="col-12">
+                <button class="btn btn-success" type="submit">Education
+                </button>
+            </div>
+        </div>
+    </form>
+    {{ ckeditor.load(custom_url = url_for('static',filename='ckeditor/ckeditor.js')) }}
+
+    {{ ckeditor.config(name='content')}}
+    <!-- Modal Contetn here -->
+</div>
+
+{% endblock add_education %}

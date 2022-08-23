@@ -1,0 +1,180 @@
+{% extends "layout.html"%}
+{% block content %}
+
+
+<div class="nav-item dropdown d-flex flex-row-reverse p-5">
+    <a href="#" class="nav-link dropdown-toggle btn my-2" data-bs-toggle="dropdown">Lessons in This Field </a>
+    
+    <div class="dropdown-menu">
+       {% for lsn in lesson.field_name.lessons%} 
+        {% if lsn.title == lesson.title %}
+          <li class="list-group-item border active bg-info" aria-current="true" style="width: 100%;">
+            <a class="link text-light" href="{{url_for('users.lesson', lesson_slug=lsn.slug, field=lsn.field_name.title)}}">
+        {{lsn.title}}
+             </a>
+          </li>
+             
+             
+       
+       {% else %}
+       <li class="list-group-item border" aria-current="false">
+           <a class="link text-dark" href="{{url_for('users.lesson',lesson_slug=lsn.slug, field=lsn.field_name.title)}}">
+               {{lsn.title}}
+           </a>
+       </li>
+       {%endif %} 
+       {% endfor %} 
+      </div>
+      
+</div>                
+
+      <img class="border rounded-circle p-1 mx-auto mb-3 my-1" src="{{url_for('static',filename='lesson_thumbnail/'+lesson.thumbnail)}}" style="width: 250px; height: 250px;">   
+                           
+                
+<div class="container p-5">
+
+    <div class="row">
+      <h3>{{lesson.title}}</h3>
+      <hr class="text-info">
+        <!-- article contents -->
+        {% block lesson %} {% endblock lesson%}
+        <div></div>
+            
+        <!-- sidebar -->
+        
+        
+         <!--  previous and next lesson -->
+            <div class="row justify-content-md-center py-5">
+                <div class="col-4">
+                    {% if previous_lesson %}
+                    <a href="{{url_for('users.lesson',lesson_slug=previous_lesson.slug,field=previous_lesson.field_name.title)}}">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="{{previous_lesson.title}}">
+                            &lt&lt&lt Previous Lesson
+                        </button>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-4">
+                  {% if next_lesson %}
+                  <a href="{{url_for('users.lesson',lesson_slug=next_lesson.slug,field=next_lesson.field_name.title)}}">
+                      <button class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                          title="{{next_lesson.title}}">
+                          &gt&gt&gt next lesson
+                      </button>
+                  </a>
+                  {% endif %}
+              </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="col-4">
+            <!-- author -->
+            <div class="my-5">
+                
+                <span class="text-primary">
+                    <br>
+                    <h3>Instructor Lesson:</h3>
+                    <hr>
+                    <div class="d-flex flex-row">
+                    <div class="p-5">
+                      <img class="border rounded-circle p-1 mx-auto mb-3 my-1"
+                      src="{{url_for('static',filename='user_pics/'+lesson.author.image_file)}}" style="width: 100px; height: 100px;">
+                      <div></div>
+            
+                      <a href="#" class="link">{{lesson.author.username}}</a>
+                      <div> </div>
+                     
+                      <span class="text-muted">
+                        {{lesson.date_posted.strftime('%Y-%m-%d')}}
+                      </span>
+                </span>
+                   
+                      
+                </div>
+            </div>
+            </div>
+            <!-- course icon -->
+            <div class="d-flex flex-row">
+            <div class="">
+              <br>
+              <h3 class="text-info">BEST SOURCE LESSON : </h3>
+              <hr>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th>Source</th>
+                    
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  <tr>
+                    <th scope="row"></th>
+                    <td colspan=""><a href="{{lesson.sources}}">{{lesson.sources}}</a></td>
+                    
+                  </tr>
+                  <tr>
+                    
+                  </tr>
+                  
+                </tbody>
+               
+              </table>
+            </div>
+            </div>
+           
+            <br>
+            <!-- list of lessons in this course -->
+            
+        </div>
+    </div>
+    <br>
+    
+    
+    
+</div>
+</div>
+
+<h6 class="container my-1 p-1"> For more lessons please go to page home  : <a href="{{url_for('main.home')}}" class="text-info">Home </a></h6>
+<h6 class="container my-1 p-1"> If you want article in specify Field please go to page the best field : <a class="text-info">The best field</a></h6>
+<hr class="text-info">
+{% if lesson in current_user.lessons%}
+<div class="container  my-3">
+  <p>You are the author of the lesson ,You can update or delete this article </p>
+  <button class="btn btn-danger btn-sm m-1 mb-1 col-6" data-bs-toggle="modal" data-bs-target="#deleteModal"> delete </button>
+  <button class="btn btn-info btn-sm m-1 mb-1 col-5"> <a href="{{url_for('users.update_lesson',lesson_slug=lesson.slug,field=lesson.field_name.title)}}" class="text-light"> Update</a></button>
+</div>
+<hr class="info">
+    
+{% endif %}
+ 
+   
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Article ?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete the lesson. This cannot be undone!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="{{ url_for('users.delete_lesson', lesson_id = lesson.id)}}" method="POST">
+                                <input type="submit" class="btn btn-danger" value="Delete">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+
+{% endblock content%}
